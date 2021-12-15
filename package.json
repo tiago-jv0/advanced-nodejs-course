@@ -1,7 +1,23 @@
 {
-  "name": "advanced-node",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Tiago Jose <tiago_jvo@outlook.com>",
-  "license": "MIT"
+    "name": "advanced-node",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Tiago Jose <tiago_jvo@outlook.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "node dist/main/api",
+        "build": "rimraf dirst && tsc"
+    },
+    "devDependencies": {
+        "@types/module-alias": "^2.0.1",
+        "@types/node": "^16.11.13",
+        "typescript": "^4.5.4"
+    },
+    "engines": {
+        "node": "16.x"
+    },
+    "dependencies": {
+        "module-alias": "^2.2.2",
+        "rimraf": "^3.0.2"
+    }
 }
