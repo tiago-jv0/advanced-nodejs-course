@@ -1,0 +1,7 @@
+{
+  "name": "advanced-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tiago Jose <tiago_jvo@outlook.com>",
+  "license": "MIT"
+}
