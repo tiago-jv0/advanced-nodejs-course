@@ -1,5 +1,5 @@
 import { LoadFacebookUserApi } from '@/data/contracts/apis'
-import { LoadUserAccountRepository } from '@/data/contracts/repositories'
+import { CreateFacebookAccountRepository, LoadUserAccountRepository } from '@/data/contracts/repositories'
 import { FacebookAuthenticationService } from '@/data/services'
 import { AuthenticationError } from '@/domain/errors'
 
@@ -9,14 +9,16 @@ describe('FacebookAuthenticationService', () => {
   let sut: FacebookAuthenticationService
   let loadFacebookUserApi: MockProxy<LoadFacebookUserApi>
   let loadUserAccountRepository: MockProxy<LoadUserAccountRepository>
+  let createFacebookAccountRepository: MockProxy<CreateFacebookAccountRepository>
   const token = 'any_token'
 
   beforeEach(() => {
     loadFacebookUserApi = mock<LoadFacebookUserApi>()
     loadUserAccountRepository = mock<LoadUserAccountRepository>()
+    createFacebookAccountRepository = mock<CreateFacebookAccountRepository>()
     loadFacebookUserApi.loadUser.mockResolvedValue({ name: 'any_fb_name', email: 'any_fb_email', facebookId: 'any_fb_id' })
 
-    sut = new FacebookAuthenticationService(loadFacebookUserApi, loadUserAccountRepository)
+    sut = new FacebookAuthenticationService(loadFacebookUserApi, loadUserAccountRepository, createFacebookAccountRepository)
   })
 
   it('should call LoadFacebookUserApi with correct params', async () => {
@@ -39,5 +41,14 @@ describe('FacebookAuthenticationService', () => {
 
     expect(loadUserAccountRepository.load).toHaveBeenCalledWith({ email: 'any_fb_email' })
     expect(loadUserAccountRepository.load).toHaveBeenCalledTimes(1)
+  })
+
+  it('should call CreateFacebookAccountRepository when LoadUserAccountRepository returns undefined', async () => {
+    loadUserAccountRepository.load.mockResolvedValueOnce(undefined)
+
+    await sut.perform({ token })
+
+    expect(createFacebookAccountRepository.createFromFacebook).toHaveBeenCalledWith({ name: 'any_fb_name', email: 'any_fb_email', facebookId: 'any_fb_id' })
+    expect(createFacebookAccountRepository.createFromFacebook).toHaveBeenCalledTimes(1)
   })
 })
