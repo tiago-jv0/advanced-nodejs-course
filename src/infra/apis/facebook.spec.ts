@@ -34,19 +34,20 @@ describe('FacebookApi', () => {
   let httpGetClient: MockProxy<HttpGetClient>
   let clientId: string
   let clientSecret: string
+  let sut: FacebookApi
 
   beforeAll(() => {
     clientId = 'any_client_id'
     clientSecret = 'any_client_secret'
-  })
 
-  beforeEach(() => {
     httpGetClient = mock<HttpGetClient>()
   })
 
-  it('should get app token', async () => {
-    const sut = new FacebookApi(httpGetClient, clientId, clientSecret)
+  beforeEach(() => {
+    sut = new FacebookApi(httpGetClient, clientId, clientSecret)
+  })
 
+  it('should get app token', async () => {
     await sut.loadUser({ token: 'any_client_token' })
 
     expect(httpGetClient.get).toHaveBeenCalledWith({
