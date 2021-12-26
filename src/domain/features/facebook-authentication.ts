@@ -11,5 +11,4 @@ export namespace FacebookAuthentication {
   }
 
   export type Result = AccessToken | AuthenticationError
-
 }
