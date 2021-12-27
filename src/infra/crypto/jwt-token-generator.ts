@@ -2,7 +2,7 @@ import { TokenGenerator } from '@/data/contracts/cypto'
 
 import { sign } from 'jsonwebtoken'
 
-export class JwtTokenGenerator {
+export class JwtTokenGenerator implements TokenGenerator {
   constructor (private readonly secretKey: string) {}
 
   async generateToken (params: TokenGenerator.Params): Promise<string> {
