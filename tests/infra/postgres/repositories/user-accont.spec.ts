@@ -44,4 +44,22 @@ describe('PgUserAccountRepository', () => {
       expect(account).toBeUndefined()
     })
   })
+
+  describe('SaveWithFacebook', () => {
+    it('should create an account if id is undefined', async () => {
+      await sut.saveWithFacebook({ email: 'any_email', name: 'any_name', facebookId: 'any_fb_id' })
+
+      const pgUser = await pgUserRepository.findOne({ email: 'any_email' })
+
+      expect(pgUser?.id).toBe(1)
+    })
+
+    it('should update an account if id is not undefined', async () => {
+      await sut.saveWithFacebook({ email: 'any_email', name: 'any_name', facebookId: 'any_fb_id' })
+
+      const pgUser = await pgUserRepository.findOne({ email: 'any_email' })
+
+      expect(pgUser?.id).toBe(1)
+    })
+  })
 })
