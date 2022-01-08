@@ -28,7 +28,9 @@ export class FacebookApi implements LoadFacebookUserApi {
 
   async loadUser ({ token }: LoadUserParams): Promise<LoadUserResult> {
     return this.getUserInfo(token)
-      .then(({ id, name, email }) => ({ facebookId: id, name, email }))
+      .then(({ id, name, email }) => {
+        return { facebookId: id, name, email }
+      })
       .catch(() => undefined)
   }
 
@@ -57,7 +59,6 @@ export class FacebookApi implements LoadFacebookUserApi {
 
   private async getUserInfo (clientToken: string): Promise<UserInfo> {
     const debugToken = await this.getDebugToken(clientToken)
-
     return this.httpClient.get({
       url: `${this.baseUrl}/${debugToken.data.user_id}`,
       params: {

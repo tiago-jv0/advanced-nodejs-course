@@ -5,8 +5,8 @@
     "author": "Tiago Jose <tiago_jvo@outlook.com>",
     "license": "MIT",
     "scripts": {
-        "start": "node dist/main",
-        "build": "rimraf dist && tsc -p tsconfig-build.json",
+        "start": "node ./build/main",
+        "build": "rimraf build && tsc -p tsconfig-build.json",
         "lint": "eslint .",
         "lint:fix": "yarn lint -- --fix",
         "test": "jest --passWithNoTests --no-cache --runInBand",
