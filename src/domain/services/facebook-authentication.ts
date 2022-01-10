@@ -1,9 +1,9 @@
 import { FacebookAuthentication } from '@/domain/features'
-import { LoadFacebookUserApi } from '@/data/contracts/apis'
+import { LoadFacebookUserApi } from '@/domain/contracts/apis'
 import { AuthenticationError } from '@/domain/errors'
-import { SaveFacebookAccountRepository, LoadUserAccountRepository } from '@/data/contracts/repositories'
+import { SaveFacebookAccountRepository, LoadUserAccountRepository } from '@/domain/contracts/repositories'
 import { AccessToken, FacebookAccount } from '@/domain/models'
-import { TokenGenerator } from '@/data/contracts/cypto'
+import { TokenGenerator } from '@/domain/contracts/cypto'
 
 export class FacebookAuthenticationService implements FacebookAuthentication {
   constructor (

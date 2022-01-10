@@ -1,4 +1,4 @@
-import { TokenGenerator } from '@/data/contracts/cypto'
+import { TokenGenerator } from '@/domain/contracts/cypto'
 
 import { sign } from 'jsonwebtoken'
 
